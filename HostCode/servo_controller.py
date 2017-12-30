@@ -27,7 +27,7 @@ class Servo:
         self.channel = channel
 
     def set_angle(self, degrees):
-        value = (self.servo_max - self.servo_min)/180 * degrees
+        value = int((self.servo_max - self.servo_min)/180 * degrees)
         pwm.set_pwm(self.channel, 0, self.servo_min + value)
 
 Stukov = Servo(0)
