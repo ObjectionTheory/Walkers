@@ -1,7 +1,6 @@
 
 
 from __future__ import division
-import time
 
 # Import the PCA9685 module.
 import Adafruit_PCA9685
@@ -30,5 +29,4 @@ class Servo:
         value = int((self.servo_max - self.servo_min)/180 * degrees)
         pwm.set_pwm(self.channel, 0, self.servo_min + value)
 
-Stukov = Servo(0)
-Stukov.set_angle(90)
+    
