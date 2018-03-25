@@ -7,4 +7,4 @@ servos = [servo.Servo(i) for i in range(12)]
 
 for i in range(12):
     servos[i].set_angle(basePositions[i])
-    time.sleep(1)
+    time.sleep(1) 
