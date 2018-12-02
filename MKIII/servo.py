@@ -37,7 +37,7 @@ class Servo:
         pwm.set_pwm(self.channel, 0, int(pulse))
 
     def mapValues(self, x, min1, max1, min2, max2):
-        return min2 + (max2 - min2) * x / (max1 - min1)
+        return min2 + (max2 - min2) * (x / (max1 - min1))
     
     def setServo(self, angle):
         self.angle = angle
@@ -45,4 +45,5 @@ class Servo:
 
     def update(self):
         pulse = self.mapValues(self.angle, 0, 180, self.servo_min, self.servo_max)
+        print(self.angle, pulse)
         self.set_servo_pulse(pulse)
