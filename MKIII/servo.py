@@ -18,8 +18,10 @@ class Servo:
     def __init__(self, channel, angle = 90):
         self.channel = channel
         # Configure min and max servo pulse lengths
-        self.servo_min = 187  # Min pulse length out of 4096
-        self.servo_max = 534  # Max pulse length out of 4096
+        #self.servo_min = 187  # Min pulse length out of 4096
+        #self.servo_max = 534  # Max pulse length out of 4096
+        self.servo_min = 150
+        self.servo_max = 600
         
         self.min = 0
         self.max = 180
