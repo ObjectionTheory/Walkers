@@ -22,7 +22,7 @@ class Servo:
         self.servo_max = 534  # Max pulse length out of 4096
         
         self.min = 0
-        self.max = 90
+        self.max = 180
         self.angle = angle
     
     # Helper function to make setting a servo pulse width simpler.
