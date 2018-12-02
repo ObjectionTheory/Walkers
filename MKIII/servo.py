@@ -47,5 +47,5 @@ class Servo:
 
     def update(self):
         pulse = self.mapValues(self.angle, 0, 180, self.servo_min, self.servo_max)
-        print(self.angle, pulse)
+        print(self.channel, self.angle, pulse)
         self.set_servo_pulse(pulse)
