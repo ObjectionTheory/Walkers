@@ -9,6 +9,8 @@ class Leg:
 
         #make sum servos
         self.joints = [Servo(i*4+id) for i in range(3)]
+        self.joints[0].angle = 90
+        self.joints[1].angle = 90
         self.joints[2].angle = 30
 
         #set servos to base position
