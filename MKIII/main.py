@@ -8,12 +8,12 @@ class Leg:
         self.id = id
 
         #make sum servos
-        #self.joints = [Servo(i*4+id) for i in range(3)]
-        #self.joints[2].angle = 30
+        self.joints = [Servo(i*4+id) for i in range(3)]
+        self.joints[2].angle = 30
 
         #set servos to base position
-        #for servo in self.joints:
-        #    servo.setServo(servo.angle)
+        for servo in self.joints:
+            servo.setServo(servo.angle)
 
         #loving those constants                             
         self.L1 = 88    #upper leg                            
@@ -118,7 +118,7 @@ class Leg:
 #The Big Boi
 class Walker:
     def __init__(self):
-        legs = [Leg(i) for i in range(4)]
+        self.legs = [Leg(i) for i in range(4)]
         self.height = 90
         self.offset = 90
 
