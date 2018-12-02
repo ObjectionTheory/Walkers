@@ -124,7 +124,7 @@ class Walker:
 
 
     def update(self):
-        for leg in legs:
+        for leg in self.legs:
             leg.setAngles(self.offset, self.height)
 
 
@@ -132,3 +132,7 @@ daddy = Walker()
 
 while True:
     daddy.update()
+    if input() == "w":
+        daddy.height += 1
+    else:
+        daddy.height -= 1
