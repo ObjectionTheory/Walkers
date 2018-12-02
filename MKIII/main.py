@@ -127,7 +127,7 @@ class Walker:
 
     def update(self):
         for leg in self.legs:
-            leg.setAngles(self.offset, self.height)
+            leg.setAngles(self.offset, -self.height)
 
 
 daddy = Walker()
