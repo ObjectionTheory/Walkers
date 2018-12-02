@@ -4,14 +4,14 @@ import numpy as np
 
 #the small boi
 class Leg:
-    def __init__(self, id):
-        self.id = id
+    def __init__(self, identity):
+        self.id = identity
 
         #make sum servos
         self.joints = [Servo(i*4+id) for i in range(3)]
         self.joints[0].angle = 90
         self.joints[1].angle = 90
-        self.joints[2].angle = 30
+        self.joints[2].angle = 90
 
         #set servos to base position
         for servo in self.joints:
@@ -110,9 +110,12 @@ class Leg:
         self.calculateValues()
 
         hipAngle = self.findP1angle()
-        self.joints[1].angle = hipAngle
-
         kneeAngle = self.findP3angle()
+        if self.id % 2 == 0:
+            hipAngle = 180 - hipAngle
+            kneeAngle = 180 - kneeAngle
+
+        self.joints[1].angle = hipAngle
         self.joints[2].angle = kneeAngle
 
         return hipAngle, kneeAngle
@@ -134,7 +137,8 @@ daddy = Walker()
 
 while True:
     daddy.update()
-    if input() == "w":
+    entry = input("ddd\n")
+    if entry == "w":
         daddy.height += 1
     else:
         daddy.height -= 1
