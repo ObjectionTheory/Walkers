@@ -34,7 +34,7 @@ class Servo:
         print('{0}us per bit'.format(pulse_length))
         pulse *= 1000
         pulse //= pulse_length
-        pwm.set_pwm(self.channel, 0, pulse)
+        pwm.set_pwm(self.channel, 0, int(pulse))
 
     def mapValues(self, x, min1, max1, min2, max2):
         return min2 + (max2 - min2) * x / (max1 - min1)
