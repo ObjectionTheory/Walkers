@@ -2,7 +2,7 @@ var http = require('http').createServer(handler); //require http server, and cre
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http) //require socket.io module and pass the http object (server)
 var i2cBus = require("i2c-bus");
-var drier = require("pca9685").Pca9685Driver;
+var Driver = require("pca9685").Pca9685Driver;
 var options = {
     i2c: i2cBus.openSync(1),
     address: 0x40,
@@ -10,7 +10,7 @@ var options = {
     debug: false
 };
 
-pwm = new Pca9685Driver(options, function(err) {
+pwm = new Driver(options, function(err) {
     if (err) {
         console.error("Error initializing PCA9685");
         process.exit(-1);
