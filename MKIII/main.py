@@ -86,7 +86,6 @@ class Leg:
         return self.p5
 
     def findP4(self):
-        print(self.p5)
         vect1, vect2 = self.findIntersect(self.p5, self.p3, self.B, self.A)
         if vect1[1] > vect2[1]:
             self.p4 = vect1
