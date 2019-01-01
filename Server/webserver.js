@@ -1,4 +1,4 @@
-import { setServers } from 'dns';
+
 
 var http = require('http').createServer(handler); //require http server, and create server with function handler()
 var fs = require('fs'); //require filesystem module
@@ -11,7 +11,6 @@ var options = {
     frequency: 60,
     debug: false
 };
-
 pwm = new Driver(options, function(err) {
     if (err) {
         console.error("Error initializing PCA9685");
