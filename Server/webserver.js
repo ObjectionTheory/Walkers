@@ -1,3 +1,5 @@
+import { setServers } from 'dns';
+
 var http = require('http').createServer(handler); //require http server, and create server with function handler()
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http) //require socket.io module and pass the http object (server)
@@ -39,15 +41,37 @@ io.sockets.on('connection', function (socket) {// WebSocket Connection
   var lightvalue = 0; //static variable for current status
   
   socket.on('light', function(data) { //get light switch status from client
-    pwm.setPulseLength(0, 1300);
+    
     
   });
   socket.on("reset", function() {
-      for (var i = 0; i < 12; i ++) {
-          pwm.setPulseLength(i, 1500);
-      }
+      setServos();
+  })
+
+  socket.on("change:interval", function(data) {
+    servoValues[0] = mapValues(data, 100, 1000, 0, 180);
   })
 });
+
+var setServos = function(i) {
+  if (i == 12) {
+    return;
+  }
+
+  angle = mapValues(servoValues[i], 0, 180, 1000, 2000);
+  pwm.setPulseLength(i, angle);
+
+  setTimeout(function() {
+    setServos(i+1);
+  }, 10);
+}
+
+var servoValues = [90, 90, 90, 90, 90, 90, 90, 90];
+
+var mapValues = function(z, xmin, xmax, ymin, ymax) {
+  var p = (z-xmin) / (xmax - xmin);
+  return (ymax-ymin) * p + ymin;
+}
 
 process.on('SIGINT', function () { //on ctrl+c
   
