@@ -16,6 +16,8 @@ PVector p3 = new PVector(-10, 23.5);
 PVector p4 = new PVector(0, 0);
 PVector p5 = new PVector(0, 0);
 PVector p6 = new PVector(0, 0);
+PVector temp1;
+PVector temp2;
 
 void findP2(float angle) {
   p2.x = L1 * cos(radians(-angle)) + p1.x;
@@ -28,21 +30,34 @@ void findP4(float angle) {
 }
 
 void findP5() {
+  
   PVector P2 = p2.copy();
   PVector P4 = p4.copy();
-  float d = PVector.dist(P2, P4);
-  float a = (sq(B) - sq(L3) + sq(d)) / (2*d);
-  float h = sqrt(sq(B) - sq(a));
-  PVector P = P4.add((P2.sub(P4)).mult(a).div(d));
-  PVector vect1 = new PVector(P.x + h*(p2.y - p1.y)/d, P.y - h*(p2.x-p1.x)/d); 
-  PVector vect2 = new PVector(P.x - h*(p2.y - p1.y)/d, P.y + h*(p2.x-p1.x)/d);
+  float d = dist(P2.x, P2.y, P4.x, P4.y);
+  println(d);
+  float a = (sq(L3) - sq(B) + sq(d)) / (2*d);
+  float h = sqrt(sq(L3) - sq(a));
+  float px = P2.x + a * (P4.x-P2.x)/d;
+  float py = P2.y + a * (P4.y-P2.y)/d;
+  PVector vect1 = new PVector(px + h*(P4.y - P2.y)/d,
+                              py - h*(P4.x-P2.x)/d
+                              ); 
+  PVector vect2 = new PVector(px - h*(P4.y - P2.y)/d,
+                              py + h*(P4.x-P2.x)/d
+                              );
+  //println(P2.x == p2.x, P4.x ==p4.x);                           
+  ellipse(p2.x, p2.y, 10, 10);
+  ellipse(p4.x, p4.y, 10, 10);
+                         
+  temp1 = vect1;
+  temp2 = vect2;
 
   if (vect1.y > vect2.y) {
     p5 = vect1.copy();
   } else {
     p5 = vect2.copy();
   }
-  //line(p4.x, p4.x, P.x, P.y);
+  
 }
 
 void findP6() {
@@ -51,7 +66,7 @@ void findP6() {
   float dy = (p2.y-p5.y)/len;
   p6.x = p2.x + L4 * dx;
   p6.y = p2.y + L4 * dy;
-  println(dx, dy);
+  
 }
 
 
@@ -66,12 +81,13 @@ void draw() {
   pushMatrix();
 
   translate(100, 200);
+  translate(50, 0);
+  rotateX(PI);
   findP2(angle1);
   findP4(angle2);
   findP5();
   findP6();
-  translate(50, 0);
-  rotateX(PI);
+  
 
   stroke(255, 0, 0);
   line(p1.x, p1.y, p2.x, p2.y);
@@ -83,26 +99,32 @@ void draw() {
   stroke(0, 0, 255);
   line(p2.x, p2.y, p6.x, p6.y);
   line(p5.x, p5.y, p2.x, p2.y);
+  
   stroke(0);
   strokeWeight(0.5);
-  ellipse(p3.x, p3.y, A*2, A*2);
-  ellipse(p1.x, p1.y, L1*2, L1*2);
+  //ellipse(p3.x, p3.y, A*2, A*2);
+  //ellipse(p1.x, p1.y, L1*2, L1*2);
   ellipse(p4.x, p4.y, B*2, B*2);
   ellipse(p2.x, p2.y, L3*2, L3*2);
+  ellipse(p5.x, p5.y, 10, 10);
+  //ellipse(temp1.x, temp1.y, 20, 20);
+  //ellipse(temp2.x, temp2.y, 20, 20);
+ 
   popMatrix();
   
   if (keyPressed) {
-   if (key == 'a') {
+   if (key == 's') {
       angle1 ++; 
    }
-   if (key == 'd') {
+   if (key == 'w') {
       angle1 --; 
    }
-   if (key == 'w') {
+   if (key == 'd') {
       angle2 ++; 
    }
-   if (key == 's') {
+   if (key == 'a') {
       angle2 --; 
    }
   }
+  println(p6.x, p6.y, 180-angle1, angle2+90);
 }
