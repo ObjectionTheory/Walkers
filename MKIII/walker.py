@@ -13,6 +13,8 @@ class Leg:
         self.joints[1].angle = 90
         self.joints[2].angle = 90
 
+        
+
         #set servos to base position
         for servo in self.joints:
             servo.update(servo.angle)
@@ -131,6 +133,13 @@ class Walker:
         self.servos = self.legs[0].joints + self.legs[1].joints + self.legs[2].joints + self.legs[3].joints 
         self.height = 90
         self.offset = 90
+        self.servoOffsets = [-10, -14, 10,
+                             -34, -18, 0,
+                             -6, -14, -14,
+                             -28, -12, -2]
+
+        for servo in range(12):
+            self.servos[servo].offset = self.servoOffsets[servo]
 
     def update(self):
         for leg in self.legs:
