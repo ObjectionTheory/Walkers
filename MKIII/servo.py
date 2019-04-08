@@ -8,8 +8,13 @@ class Servo:
         self.id = identity
         self.angle = angle
         self.offset = offset
+        self.min = 0
+        self.max = 180
     
     def update(self, angle):
-        if angle > self.min anf angle < self.max:
+        if angle > self.min and angle < self.max:
             kit.servo[self.id].angle = angle-self.offset
-            self.angle = angle-offset
+            self.angle = angle-self.offset
+
+
+    

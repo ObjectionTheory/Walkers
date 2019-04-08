@@ -120,8 +120,6 @@ class Leg:
 
         return hipAngle, kneeAngle
     
-    def setAngle(self):
-        for joint in self.joints:
             
 
 #The Big Boi
